@@ -1,6 +1,6 @@
 # АЛГОРИТМЫ РАБОТАЮТ ТОЛЬКО НА УПОРЯДОЧЕННЫХ МАССИВАХ!
 
-def bin_search(p, a, l, r):
+def BinSearch(p, a, l, r):
     while l<r :
         m = (l+r)//2
         if a[m] == p:
