@@ -53,5 +53,3 @@ else:
     if answ2 =='Да ' or answ2 =='Да':
         y = insertion_point (p, a, 0, len(a))
         print(f'Его место вставки: {y} позиция')
-
-
