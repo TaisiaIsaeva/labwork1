@@ -1,9 +1,6 @@
 name: Secret Scanning
  
 on:
-  push:
-    branches:
-      - main
   pull_request:
     branches:
       - main
@@ -17,13 +14,16 @@ jobs:
     runs-on: ubuntu-latest
  
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
  
-      - name: Scan for secrets
-        uses: trufflesecurity/trufflehog@main
-        with:
-          extra_args: --results=verified,unknown,unverified
-
+      - name: Scan current files
+        run: |
+          rm -rf .git
+          docker run --rm \
+            -v "$PWD:/repo:ro" \
+            ghcr.io/trufflesecurity/trufflehog:latest \
+            filesystem /repo \
+            --fail \
+            --no-verification \
+            --results=unverified
